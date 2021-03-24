@@ -1,6 +1,6 @@
+@import "~bootstrap/scss/bootstrap";
 * {
 	margin: 0;
-	box-sizing: border-box;
 	padding: 0;
 }
 
@@ -22,12 +22,11 @@
 	justify-content: center;
 	align-items: center;
 	.appContainer {
+		max-width: 55rem;
+		min-height: 25rem;
+		margin: auto;
 		background-color: #f0f0f0;
-		min-width: 45rem;
-		min-height: 40rem;
 		border: solid 0.2rem rgb(37, 37, 37);
 		border-radius: 0.4rem;
-		display: flex;
-		justify-content: space-between;
 	}
 }
