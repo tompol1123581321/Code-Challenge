@@ -1,21 +1,16 @@
 import { Button } from "@material-ui/core"
 
-import React, { useState } from "react"
-import {
-	Card,
-	ListGroup,
-	ListGroupItem,
-} from "react-bootstrap"
-import { MassageInterface, Person } from "../interfaces"
+import React from "react"
+import { Card } from "react-bootstrap"
+import { MassageInterface } from "../interfaces"
 var randomWords = require("random-words")
 
 const DummyControls: React.FC<{
-	personalInfo: Person
 	massages: Array<MassageInterface>
 	setMassages: ([]: Array<MassageInterface>) => void
-}> = ({ personalInfo, massages, setMassages }) => {
-	const [showHide, setShowHide] = useState<boolean>(false)
-
+	showHide: Boolean
+	setShowHide: (showHide: boolean) => void
+}> = ({ massages, setMassages, setShowHide, showHide }) => {
 	return (
 		<div className="DummyControls">
 			<Card>
@@ -30,7 +25,7 @@ const DummyControls: React.FC<{
 							const newReply: MassageInterface = {
 								text: randomWords(),
 								m: false,
-								timestamp: `${date.getDate()}.${date.getMonth()}-${date.getHours()}:${date.getMinutes()}`,
+								timestamp: `${date.getDate()}.${date.getMonth()}.-${date.getHours()}:${date.getMinutes()}`,
 							}
 							setMassages([...massages, newReply])
 						}}
@@ -49,32 +44,6 @@ const DummyControls: React.FC<{
 						Load Operator Info
 					</Button>
 				</div>
-				{showHide && (
-					<Card.Body>
-						<Card.Title>Operator Info:</Card.Title>
-						<ListGroup>
-							<ListGroupItem>
-								Name: {personalInfo.name}
-							</ListGroupItem>
-							<ListGroupItem>
-								Email: {personalInfo.email}
-							</ListGroupItem>
-							<ListGroupItem>
-								Phone: {personalInfo.phone}
-							</ListGroupItem>
-							<ListGroupItem>
-								Address: {personalInfo.address?.city}
-								{","}
-								{personalInfo.address?.street}
-								{","}
-								{personalInfo.address?.suite}
-							</ListGroupItem>
-							<ListGroupItem>
-								Company: {personalInfo.company?.name}
-							</ListGroupItem>
-						</ListGroup>
-					</Card.Body>
-				)}
 			</Card>
 		</div>
 	)

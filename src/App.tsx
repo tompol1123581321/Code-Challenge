@@ -13,6 +13,7 @@ function App() {
 	const [massages, setMassages] = useState<
 		Array<MassageInterface>
 	>([])
+	const [showHide, setShowHide] = useState<boolean>(false)
 	useEffect(() => {
 		const gettingData: () => void = async () => {
 			try {
@@ -35,9 +36,10 @@ function App() {
 						<Row>
 							<Col md={6}>
 								<DummyControls
-									personalInfo={personalInfo}
 									massages={massages}
 									setMassages={setMassages}
+									showHide={showHide}
+									setShowHide={setShowHide}
 								/>
 							</Col>
 							<Col md={6}>
@@ -45,6 +47,7 @@ function App() {
 									setMassages={setMassages}
 									massages={massages}
 									personalInfo={personalInfo}
+									showHide={showHide}
 								/>
 							</Col>
 						</Row>

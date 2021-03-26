@@ -1,6 +1,12 @@
 import { Button, TextField } from "@material-ui/core"
 import React, { useState } from "react"
-import { Card, Col, Row } from "react-bootstrap"
+import {
+	Card,
+	Col,
+	ListGroup,
+	ListGroupItem,
+	Row,
+} from "react-bootstrap"
 import { MassageInterface, Person } from "../interfaces"
 import "../style/components.scss"
 import Massage from "./massage"
@@ -9,7 +15,13 @@ const ChatWindow: React.FC<{
 	personalInfo: Person
 	massages: Array<MassageInterface>
 	setMassages: ([]: Array<MassageInterface>) => void
-}> = ({ personalInfo, massages, setMassages }) => {
+	showHide: Boolean
+}> = ({
+	personalInfo,
+	massages,
+	setMassages,
+	showHide,
+}) => {
 	const [massage, setMassage] = useState<MassageInterface>(
 		{} as MassageInterface
 	)
@@ -22,6 +34,26 @@ const ChatWindow: React.FC<{
 					<Card.Subtitle>
 						{personalInfo.phone}
 					</Card.Subtitle>
+					{showHide && (
+						<ListGroup style={{ marginTop: "2rem" }}>
+							<Card.Title>Operator Info:</Card.Title>
+
+							<ListGroupItem>
+								Email: {personalInfo.email}
+							</ListGroupItem>
+
+							<ListGroupItem>
+								Address: {personalInfo.address?.city}
+								{","}
+								{personalInfo.address?.street}
+								{","}
+								{personalInfo.address?.suite}
+							</ListGroupItem>
+							<ListGroupItem>
+								Company: {personalInfo.company?.name}
+							</ListGroupItem>
+						</ListGroup>
+					)}
 				</Card.Header>
 
 				<Card.Body
@@ -53,7 +85,7 @@ const ChatWindow: React.FC<{
 						setMassage({
 							text: e.target.value,
 							m: true,
-							timestamp: `${date.getDate()}.${date.getMonth()}-${date.getHours()}:${date.getMinutes()}`,
+							timestamp: `${date.getDate()}.${date.getMonth()}.-${date.getHours()}:${date.getMinutes()}`,
 						})
 					}}
 				/>
