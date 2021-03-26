@@ -3,20 +3,25 @@ import { useEffect, useState } from "react"
 import { Col, Container, Row } from "react-bootstrap"
 import ChatWindow from "./components/chatWindow"
 import DummyControls from "./components/dummyControls"
+import { MassageInterface, Person } from "./interfaces"
 import "./style/generalStyles.scss"
 
 function App() {
-	const [personalInfo, setPersonalInfo] = useState({})
-	const [massages, setMassages] = useState<any>([])
+	const [personalInfo, setPersonalInfo] = useState<Person>(
+		{}
+	)
+	const [massages, setMassages] = useState<
+		Array<MassageInterface>
+	>([])
 	useEffect(() => {
-		const gettingData = async () => {
+		const gettingData: () => void = async () => {
 			try {
-				const allData = await axios.get(
+				const allData: { data: Person } = await axios.get(
 					"https://jsonplaceholder.typicode.com/users/1"
 				)
 				setPersonalInfo(allData.data)
 			} catch (err) {
-				console.error(err)
+				alert(err)
 			}
 		}
 		gettingData()

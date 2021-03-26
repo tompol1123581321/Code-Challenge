@@ -1,24 +1,18 @@
 import { Button, TextField } from "@material-ui/core"
 import React, { useState } from "react"
 import { Card, Col, Row } from "react-bootstrap"
-import { Person } from "../interfaces"
+import { MassageInterface, Person } from "../interfaces"
 import "../style/components.scss"
 import Massage from "./massage"
 
 const ChatWindow: React.FC<{
 	personalInfo: Person
-	massages: any
-	setMassages: any
+	massages: Array<MassageInterface>
+	setMassages: ([]: Array<MassageInterface>) => void
 }> = ({ personalInfo, massages, setMassages }) => {
-	const [massage, setMassage] = useState<{
-		text: string
-		m: boolean
-		timestamp: string
-	}>({
-		text: "",
-		m: false,
-		timestamp: "",
-	})
+	const [massage, setMassage] = useState<MassageInterface>(
+		{} as MassageInterface
+	)
 
 	return (
 		<div className="ChatWindow">
@@ -38,18 +32,12 @@ const ChatWindow: React.FC<{
 				>
 					<Row>
 						<Col>
-							{massages.map(
-								(m: {
-									text: string
-									m: boolean
-									timestamp: string
-								}) => (
-									<Massage
-										key={Math.random() * 1000}
-										massage={m}
-									/>
-								)
-							)}
+							{massages.map((m: MassageInterface) => (
+								<Massage
+									key={Math.random() * 1000}
+									massage={m}
+								/>
+							))}
 						</Col>
 					</Row>
 				</Card.Body>

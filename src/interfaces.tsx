@@ -17,3 +17,9 @@ export interface Person {
 		bs: string
 	}
 }
+export interface MassageInterface {
+	text?: string
+	m?: boolean
+	timestamp?: string
+	key?: number
+}

@@ -6,13 +6,13 @@ import {
 	ListGroup,
 	ListGroupItem,
 } from "react-bootstrap"
-import { Person } from "../interfaces"
+import { MassageInterface, Person } from "../interfaces"
 var randomWords = require("random-words")
 
 const DummyControls: React.FC<{
 	personalInfo: Person
-	massages: any
-	setMassages: any
+	massages: Array<MassageInterface>
+	setMassages: ([]: Array<MassageInterface>) => void
 }> = ({ personalInfo, massages, setMassages }) => {
 	const [showHide, setShowHide] = useState<boolean>(false)
 
@@ -27,7 +27,7 @@ const DummyControls: React.FC<{
 					<Button
 						onClick={() => {
 							const date = new Date()
-							const newReply = {
+							const newReply: MassageInterface = {
 								text: randomWords(),
 								m: false,
 								timestamp: `${date.getDate()}.${date.getMonth()}-${date.getHours()}:${date.getMinutes()}`,
