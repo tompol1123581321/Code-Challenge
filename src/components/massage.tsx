@@ -6,6 +6,7 @@ const Massage: React.FC<{
 	massage: {
 		text: string
 		m: boolean
+		timestamp: string
 	}
 }> = ({ massage }) => {
 	const [className, setClassName] = useState<string>("")
@@ -23,6 +24,7 @@ const Massage: React.FC<{
 
 	return (
 		<div className={className}>
+			<p>{massage.timestamp}</p>
 			<Chip color={color} label={massage.text} />
 		</div>
 	)

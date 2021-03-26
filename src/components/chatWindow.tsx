@@ -13,9 +13,11 @@ const ChatWindow: React.FC<{
 	const [massage, setMassage] = useState<{
 		text: string
 		m: boolean
+		timestamp: string
 	}>({
 		text: "",
 		m: false,
+		timestamp: "",
 	})
 
 	return (
@@ -37,8 +39,15 @@ const ChatWindow: React.FC<{
 					<Row>
 						<Col>
 							{massages.map(
-								(m: { text: string; m: boolean }) => (
-									<Massage massage={m} />
+								(m: {
+									text: string
+									m: boolean
+									timestamp: string
+								}) => (
+									<Massage
+										key={Math.random() * 1000}
+										massage={m}
+									/>
 								)
 							)}
 						</Col>
@@ -52,9 +61,11 @@ const ChatWindow: React.FC<{
 					variant="outlined"
 					value={massage.text}
 					onChange={(e) => {
+						const date = new Date()
 						setMassage({
 							text: e.target.value,
 							m: true,
+							timestamp: `${date.getDate()}.${date.getMonth()}-${date.getHours()}:${date.getMinutes()}`,
 						})
 					}}
 				/>
@@ -62,7 +73,11 @@ const ChatWindow: React.FC<{
 					onClick={() => {
 						if (massage.text !== "") {
 							setMassages([...massages, massage])
-							setMassage({ text: "", m: true })
+							setMassage({
+								text: "",
+								m: true,
+								timestamp: "",
+							})
 						}
 					}}
 					variant="contained"

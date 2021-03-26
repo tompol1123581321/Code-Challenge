@@ -26,9 +26,11 @@ const DummyControls: React.FC<{
 				<div className="buttons">
 					<Button
 						onClick={() => {
+							const date = new Date()
 							const newReply = {
 								text: randomWords(),
 								m: false,
+								timestamp: `${date.getDate()}.${date.getMonth()}-${date.getHours()}:${date.getMinutes()}`,
 							}
 							setMassages([...massages, newReply])
 						}}
