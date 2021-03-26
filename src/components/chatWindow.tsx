@@ -25,6 +25,14 @@ const ChatWindow: React.FC<{
 	const [massage, setMassage] = useState<MassageInterface>(
 		{} as MassageInterface
 	)
+	const sendingMassage: () => void = () => {
+		setMassages([...massages, massage])
+		setMassage({
+			text: "",
+			m: true,
+			timestamp: "",
+		})
+	}
 
 	return (
 		<div className="ChatWindow">
@@ -88,16 +96,17 @@ const ChatWindow: React.FC<{
 							timestamp: `${date.getDate()}.${date.getMonth()}.-${date.getHours()}:${date.getMinutes()}`,
 						})
 					}}
+					onKeyDown={(e) => {
+						if (e.key === "Enter" && massage.text !== "") {
+							sendingMassage()
+						}
+					}}
 				/>
+
 				<Button
 					onClick={() => {
 						if (massage.text !== "") {
-							setMassages([...massages, massage])
-							setMassage({
-								text: "",
-								m: true,
-								timestamp: "",
-							})
+							sendingMassage()
 						}
 					}}
 					variant="contained"
